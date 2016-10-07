@@ -1,0 +1,28 @@
+---
+- name: creating controls-accelerator directory
+  file: path=/opt/controls-accelerator
+        state=directory
+        owner=root
+        group=root
+        mode=0755
+
+- name: copying controls-accelerator files
+  copy: src="{{ item }}"
+        dest="/{{ item }}"
+        owner=root
+        group=root
+        mode=0644
+  with_items:
+    - etc/profile.d/controls-accelerator.sh
+    - opt/controls-accelerator/HELP
+
+# Default password is "robot" without the quotes, see vars/main.yml
+# Incredibly insecure, which is why only on the controls_accelerator role
+# If this role is added, this setting needs to be manually disabledo
+# TODO: make it automatically remove the password please :\
+- name: giving the robot user a password that we can login with
+  user: name=robot
+        password="{{ robot_user_password }}"
+  when: robot_user_password != ""
+
+- include: http_file_transfer.yml
