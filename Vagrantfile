@@ -7,6 +7,8 @@ Vagrant.configure(2) do |config|
   config.vm.box = "bento/ubuntu-16.04"
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
+    # Another bug: https://github.com/chef/bento/issues/682
+    vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
   end
 
   config.vm.provision :ansible do |ansible|
