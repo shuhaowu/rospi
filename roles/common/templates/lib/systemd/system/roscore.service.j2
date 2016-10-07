@@ -1,0 +1,13 @@
+[Unit]
+Description=Automaticall start ROS master, parameter server, and rosout logging node
+After=network.target
+
+[Service]
+User=robot
+EnvironmentFile=/etc/default/roscore
+ExecStartPre=/bin/touch ${CMAKE_PREFIX_PATH}/.catkin
+ExecStart=/opt/ros/{{ ros_release }}/bin/roscore -p $ROS_PORT
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

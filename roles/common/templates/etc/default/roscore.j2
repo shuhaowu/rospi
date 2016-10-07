@@ -1,0 +1,10 @@
+ROS_ROOT=/opt/ros/{{ ros_release }}/share/ros
+ROS_DISTRO={{ ros_release }}
+ROS_PACKAGE_PATH=/opt/ros/{{ ros_release }}/share
+ROS_PORT=11311
+ROS_MASTER_URI=http://localhost:11311
+ROS_ETC_DIR=/opt/ros/{{ ros_release }}/etc/ros
+CMAKE_PREFIX_PATH=/opt/ros/{{ ros_release }}
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ros/{{ ros_release }}/bin
+LD_LIBRARY_PATH=/opt/ros/{{ ros_release }}/lib
+PYTHONPATH=/opt/ros/{{ ros_release }}/lib/python2.7/dist-packages

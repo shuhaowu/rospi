@@ -1,0 +1,35 @@
+---
+- name: ensuring ROS apt listing
+  template: src=etc/apt/sources.list.d/ros-latest.list.j2
+            dest=/etc/apt/sources.list.d/ros-latest.list
+            owner=root
+            group=root
+
+- name: import ROS apt signing key
+  apt_key: id=B01FA116 keyserver=ha.pool.sks-keyservers.net state=present
+
+- name: installing ROS base package
+  apt: name={{ item }}
+       state=latest
+       update_cache=yes
+  with_items:
+    - ros-{{ ros_release }}-ros-base
+    - ros-{{ ros_release }}-rosserial-arduino
+    - ros-{{ ros_release }}-rosserial
+    - vim
+    - tmux
+    - htop
+    - build-essential
+
+- name: use ROS path
+  template: src=etc/profile.d/ros-activate.sh.j2
+            dest=/etc/profile.d/ros-activate.sh
+            owner=root
+            group=root
+
+- name: robot user must exist
+  user: name=robot 
+        state=present
+
+- include: roscore-service.yml
+

@@ -1,0 +1,26 @@
+---
+- name: templating roscore configuration file
+  template: src=etc/default/roscore.j2
+            dest=/etc/default/roscore
+
+- name: templating roscore system service
+  template: src=lib/systemd/system/roscore.service.j2
+            dest=/lib/systemd/system/roscore.service
+
+- name: ensuring .ros directory for robot user
+  file: path=/home/robot/.ros
+        state=directory
+        owner=robot
+        group=robot
+        mode=0755
+
+# Not quite sure why this is needed: https://github.com/bmwcarit/meta-ros/pull/225
+- name: ensuring catkin stamp file
+  file: path=/opt/ros/{{ ros_release }}/.catkin
+        owner=robot
+        group=robot
+        mode=0644
+        state=touch
+
+- name: enabling roscore service on boot
+  service: name=roscore enabled=yes
