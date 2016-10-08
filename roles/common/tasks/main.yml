@@ -29,6 +29,7 @@
 
 - name: robot user must exist
   user: name=robot 
+        shell=/bin/bash
         state=present
 
 - include: roscore-service.yml
