@@ -1,1 +1,16 @@
-Welcome to ROS 
+Welcome to ROSPI
+================
+
+This machine has ROS installed on Ubuntu 16.04 and it is setup via:
+https://github.com/shuhaowu/rospi.
+
+This document should be displayed by the utility less(1). To quit less, press
+q.
+
+Features
+--------
+
+This machine has been installed with multiple helper utilities:
+
+
+

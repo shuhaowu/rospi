@@ -1,0 +1,28 @@
+---
+- name: create qfs user
+  user: name=qfs
+        system=yes
+        groups=robot
+        append=yes
+
+- name: create fileshare directory
+  file: path=/home/robot/misc
+        owner=robot
+        group=robot
+        mode=0775
+        state=directory
+
+- name: installing quick fileshare
+  pip: name="git+https://github.com/shuhaowu/quick-fileshare.git" editable=False
+
+- name: copying systemd service files
+  copy: src="{{ item }}"
+        dest="/{{ item }}"
+        owner=root
+        group=root
+  with_items:
+    - etc/default/quick-fileshare
+    - lib/systemd/system/quick-fileshare.service
+
+- name: enabling quick-fileshare service on boot
+  service: name=quick-fileshare enabled=yes

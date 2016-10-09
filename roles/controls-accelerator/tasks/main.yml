@@ -25,4 +25,4 @@
         password="{{ robot_user_password }}"
   when: robot_user_password != ""
 
-- include: http_file_transfer.yml
+- include: quick_fileshare.yml

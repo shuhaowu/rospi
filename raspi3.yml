@@ -1,0 +1,5 @@
+---
+- hosts: raspi3
+  roles:
+    - common
+    - controls-accelerator

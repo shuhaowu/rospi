@@ -1,0 +1,19 @@
+#!/bin/bash
+
+sudo apt-get update
+sudo apt-get install python-apt python-pip python-dev python3-dev python-setuptools libssl-dev libffi-dev
+
+export PATH=$HOME/.local/bin:$PATH
+pip install ansible --user
+
+FILENAME=$1.yml
+
+if [ ! -f $FILENAME ]; then
+  FILENAME="$(hostname).yml"
+fi
+
+if [ ! -z "$ROSPI_SECRET" ]; then
+  ansible-playbook -v -i localhost $FILENAME --become-method=sudo --become-user=root --ask-vault-pass
+else
+  ansible-playbook -v -i localhost $FILENAME --become-method=sudo --become-user=root
+fi

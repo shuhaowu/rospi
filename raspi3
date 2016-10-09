@@ -1,0 +1,2 @@
+[raspi3]
+rospi ansible_user=ubuntu ansible_become=true ansible_become_method=sudo ansible_become_pass=ubuntu

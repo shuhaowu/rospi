@@ -1,0 +1,12 @@
+[Unit]
+Description=Quick fileshare for uploading files to robot homedir
+After=network.target
+
+[Service]
+User=qfs
+EnvironmentFile=/etc/default/quick-fileshare
+ExecStart=/usr/local/bin/quick-fileshare
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

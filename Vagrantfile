@@ -11,6 +11,8 @@ Vagrant.configure(2) do |config|
     vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
   end
 
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
+
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "vagrant.yml"
     ansible.verbose = "v"

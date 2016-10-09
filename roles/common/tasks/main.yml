@@ -20,6 +20,8 @@
     - tmux
     - htop
     - build-essential
+    - python
+    - python-pip
 
 - name: use ROS path
   template: src=etc/profile.d/ros-activate.sh.j2
@@ -31,6 +33,10 @@
   user: name=robot 
         shell=/bin/bash
         state=present
+
+- name: ensuring virtualenv exists
+  pip: name=virtualenv
+       state=latest
 
 - include: roscore-service.yml
 
