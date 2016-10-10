@@ -1,0 +1,6 @@
+---
+# https://bugs.launchpad.net/ubuntu-pi-flavour-maker/+bug/1585335
+- name: disable predictable network naming
+  file: src=/dev/null
+        dest=/etc/udev/rules.d/80-net-setup-link.rules
+        state=link

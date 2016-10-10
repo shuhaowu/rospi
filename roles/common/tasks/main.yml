@@ -22,6 +22,7 @@
     - build-essential
     - python
     - python-pip
+    - git
 
 - name: use ROS path
   template: src=etc/profile.d/ros-activate.sh.j2
