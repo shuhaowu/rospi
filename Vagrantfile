@@ -13,10 +13,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.network "forwarded_port", guest: 8000, host: 8000
 
-  config.vm.provision :ansible do |ansible|
+  config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "vagrant.yml"
     ansible.verbose = "v"
-    ansible.sudo = true
-    ansible.ask_vault_pass = true if ENV["ROSPI_SECRET"]
   end
 end
