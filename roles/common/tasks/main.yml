@@ -35,6 +35,11 @@
         shell=/bin/bash
         state=present
 
+- name: add robot user to dialout
+  user: name=robot
+        groups=dialout
+        append=yes
+
 - name: ensuring virtualenv exists
   pip: name=virtualenv
        state=latest
