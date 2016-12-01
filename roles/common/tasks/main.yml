@@ -35,9 +35,9 @@
         shell=/bin/bash
         state=present
 
-- name: add robot user to dialout
+- name: add robot user to groups
   user: name=robot
-        groups=dialout
+        groups=dialout,input,plugdev,spi,i2c,gpio
         append=yes
 
 - name: ensuring virtualenv exists
