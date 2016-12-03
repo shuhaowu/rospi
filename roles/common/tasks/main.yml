@@ -35,6 +35,17 @@
         shell=/bin/bash
         state=present
 
+- name: ensure groups exist on the vagrant machine
+  group: name={{ item }}
+         state=present
+  with_items:
+    - dialout
+    - input
+    - plugdev
+    - spi
+    - i2c
+    - gpio
+
 - name: add robot user to groups
   user: name=robot
         groups=dialout,input,plugdev,spi,i2c,gpio
