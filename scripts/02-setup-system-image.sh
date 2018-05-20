@@ -1,12 +1,18 @@
 #!/bin/bash
 
-image=$1
-hostname=$2
-size_adjustment=$3
+image=$IMAGE_PATH
+hostname=$SYSTEM_HOSTNAME
+size_adjustment=$IMAGE_SIZE_ADJUSTMENT
+password=$HUMAN_PASSWORD
 
 build_dir=$(dirname $image)
 rootfs_dir=$build_dir/rootfs
 boot_dir=$build_dir/boot
+
+if [ -z "$password" ]; then
+  echo "WARNING: no password will be set on the human user."
+  echo ""
+fi
 
 set -xe
 
@@ -49,7 +55,7 @@ mount -o bind /dev/pts ${rootfs_dir}/dev/pts
 mount -o bind /sys ${rootfs_dir}/sys
 mount -o bind /proc ${rootfs_dir}/proc
 
-chroot ${rootfs_dir} env -i HOME=/root /setup-core.sh $hostname
+chroot ${rootfs_dir} env -i HOME=/root /setup-core.sh $hostname $password
 
 if [ -d custom/rootfs ]; then
   cp -r custom/rootfs/. ${rootfs_dir}

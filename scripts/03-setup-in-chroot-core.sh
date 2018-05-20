@@ -1,6 +1,8 @@
 #!/bin/bash --login
 
 HOSTNAME=$1
+PASSWORD=$2
+
 ROS_RELEASE=kinetic
 
 if [ -z "$HOSTNAME" ]; then
@@ -55,6 +57,10 @@ chmod 0700 /home/human/.ssh
 chmod 0600 /home/human/.ssh/authorized_keys
 
 echo "human ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/human-sudoer
+
+if [ ! -z "$PASSWORD" ]; then
+  echo "human:$PASSWORD" | chpasswd
+fi
 
 # Configuring the hostname
 # ========================

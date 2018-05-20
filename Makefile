@@ -12,6 +12,7 @@ OUT_DIR    := $(ABS_TOP)out/
 
 SYSTEM_HOSTNAME       ?= rospi
 IMAGE_SIZE_ADJUSTMENT ?= +2G
+HUMAN_PASSWORD        ?=
 
 SOURCE_SYSTEM_IMAGE_DOWNLOAD_URL ?= https://www.finnie.org/software/raspberrypi/ubuntu-rpi3/2018-04-21/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz
 SOURCE_SYSTEM_IMAGE_FILENAME     := ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz
@@ -50,6 +51,10 @@ $(BUILT_SYSTEM_IMAGE_PATH): $(SOURCE_SYSTEM_IMAGE_PATH) $(ALL_SOURCES) system-im
 	mkdir -p $(TEMPORARY_ROOTFS_DIR)
 	mkdir -p $(TEMPORARY_BOOT_DIR)
 	cd $(dir $(SOURCE_SYSTEM_IMAGE_PATH)) && xzcat $(SOURCE_SYSTEM_IMAGE_FILENAME) > $(TEMPORARY_SYSTEM_IMAGE_PATH)
-	scripts/02-setup-system-image.sh $(TEMPORARY_SYSTEM_IMAGE_PATH) $(SYSTEM_HOSTNAME) $(IMAGE_SIZE_ADJUSTMENT)
+	IMAGE_PATH=$(TEMPORARY_SYSTEM_IMAGE_PATH) \
+		SYSTEM_HOSTNAME=$(SYSTEM_HOSTNAME) \
+		IMAGE_SIZE_ADJUSTMENT=$(IMAGE_SIZE_ADJUSTMENT) \
+		HUMAN_PASSWORD=$(HUMAN_PASSWORD) \
+		scripts/02-setup-system-image.sh
 	cp $(TEMPORARY_SYSTEM_IMAGE_PATH) $@
 	sha256sum $@ > $@.sha256sum
