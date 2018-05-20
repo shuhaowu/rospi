@@ -1,0 +1,4 @@
+out/
+vendor/system-image/
+.vagrant/
+custom/
