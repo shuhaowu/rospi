@@ -55,6 +55,7 @@ chown -R human:human /home/human/.ssh
 cp /authorized_keys /home/human/.ssh/authorized_keys
 chmod 0700 /home/human/.ssh
 chmod 0600 /home/human/.ssh/authorized_keys
+chown -R human:human /home/human/.ssh
 
 echo "human ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/human-sudoer
 
