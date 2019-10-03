@@ -21,7 +21,7 @@ set -xe
 # Installing base ROS stuff
 # =========================
 
-apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 apt-get update
 apt-get install -y ros-$ROS_RELEASE-ros-base
 
